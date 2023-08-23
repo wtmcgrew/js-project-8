@@ -1,4 +1,4 @@
-// Checks to see if localStorage is being used
+// If items key exists in localStorage, parse and store in itemsArray variable
 const itemsArray = localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [];
 
 console.log(itemsArray);
@@ -88,17 +88,19 @@ function activateCancelListeners() {
 }
 
 
+// Removes item from UI and localStorage; then it will reset the items array and convert to string
 function deleteItem(counter) {
 	itemsArray.splice(counter, 1);
+	localStorage.removeItem("items");
 	localStorage.setItem("items", JSON.stringify(itemsArray));
-	location.reload();
+	window.location.reload(true);
 }
 
 // Will store inside itemsArray and save in localStorage and then refresh once Enter is clicked
 function createItem(item) {
 	itemsArray.push(item.value);
 	localStorage.setItem("items", JSON.stringify(itemsArray));
-	location.reload();
+	window.location.reload(true);
 }
 
 function displayDate() {
